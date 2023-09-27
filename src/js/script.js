@@ -139,5 +139,34 @@ $('.button_mini').each(function(i) {
     validateForms('#consultation form');
     validateForms('#order form');
 
+    //прописываем для маски ввода номеров 
+$('input[name=phone]').mask("+7 (999) 999-99-99");
+
+//скрипт для отправки писем через форму
+$('form').submit(function(e) {
+    e.preventDefault();
+//прописываем маленький кусочек кода при котором если форма не прошла валидацию, то она не будет отправляться
+    if (!$(this).valid()) {
+        return;
+    }
+
+    //при помощи ajax отправляем данные на сервер
+    $.ajax({
+        type: "POST",
+        url: "mailer/smart.php",
+        data: $(this).serialize()
+    }).done(function() {
+        $(this).find("input").val("");
+
+        //чтобы после отправки запроса его форма закрывалась и всплывало благодарственное окошко
+        $('#consultation, #oder').fadeOut();
+        $('.overlay, #thanks').fadeIn('slow');
+
+
+        $('form').trigger('reset');
+    });
+    return false;
+});
+
 
 });
