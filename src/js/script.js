@@ -69,4 +69,25 @@ toggleSlide('.catalog-item__link');
 toggleSlide('.catalog-item__back');
 
 
+//Modal
+
+$('[data-modal=consultation]').on('click', function() {
+    $('.overlay, #consultation').fadeIn('slow');
+});
+
+//прописываем для крестиков, чтоб окошко закрывалось при нажатии
+$('.modal__close').on('click', function() {
+    $('.overlay, #consultation, #thanks, #order').fadeOut('slow');
+});
+
+//делаем, чтоб в форме заказа правильно отображались названия товаров.
+// прописываем кнопки на товары в каталоге, чтоб появлялась форма для заказа
+$('.button_mini').each(function(i) {
+    $(this).on('click', function() {
+        $('#order .modal__descr').text($('.catalog-item__subtitle').eq(i).text());
+        $('.overlay, #order').fadeIn('slow');
+    })
+});
+
+
 });
