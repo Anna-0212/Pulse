@@ -168,7 +168,7 @@ $('form').submit(function(e) {
     return false;
 });
 
-//Smooth scroll and pageup
+//Smooth scroll and pageup (плавний скролл для ссилок та pageup)
 
 $(window).scroll(function() {
     if ($(this).scrollTop() > 1600) {
@@ -178,13 +178,12 @@ $(window).scroll(function() {
     }
 });
 
-//плавний скролл для ссилок та pageup
 $("a[href=#up]").click(function(){
     const _href = $(this).attr("href");
     $("html, body").animate({scrollTop: $(_href).offset().top+"px"});
     return false;
 });
 
-new WOW().init();
+// new WOW().init();
 
 });
