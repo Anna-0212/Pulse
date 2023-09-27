@@ -90,4 +90,54 @@ $('.button_mini').each(function(i) {
 });
 
 
+ // подключаем плагин валидации форм 
+
+    // плагин берет только первую форму с таким классом (.feed-form'). остальные формы уже не сработают
+    // $('.feed-form').validate();
+    // поэтому чаще всего к формам добавляют уникальный индификатор, по которому и находятся непосредственно нужные нам элементы. но, чтобы каждый раз их не задавать, мы можем воспользоваться селекторами вложенности (например в блоке #consultation есть form)
+    // $('#consultation-form').validate();
+    // $('#consultation form').validate({
+    //     rules: {
+    //         name: "required",
+    //         phone: "required",
+    //         email: {
+    //             required: true,
+    //             email: true
+    //         }
+    //     }
+    // });
+    // $('#order form').validate();
+
+    function validateForms(form){
+        $(form).validate({
+            rules: {
+                name: {
+                    required: true,
+                    minlength: 2
+                },
+                phone: "required",
+                email: {
+                    required: true,
+                    email: true
+                }
+            },
+            messages: {
+                name: {
+                    required: "Пожалуйста, введите свое имя",
+                    minlength: jQuery.validator.format("Введите {0} символа!")
+                },
+                phone: "Пожалуйста, введите свой номер телефона",
+                email: {
+                    required: "Пожалуйста, введите свою почту",
+                    email: "Неправильно введен адрес почты"
+                }
+            }
+        });
+    };
+    
+    validateForms('#consultation-form');
+    validateForms('#consultation form');
+    validateForms('#order form');
+
+
 });
