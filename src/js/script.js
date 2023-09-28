@@ -184,6 +184,7 @@ $("a[href=#up]").click(function(){
     return false;
 });
 
-// new WOW().init();
+
+new WOW().init();
 
 });
